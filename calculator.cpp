@@ -1,100 +1,29 @@
 #include "calculator.h"
 #include <string>
-#include <iostream>
 #include <cmath>
 
-bool ReadNumber(Number& result){
-    Number tmp;
-    if(!(std::cin>>tmp)){
-        std::cerr<<"Error: Numeric operand expected"<<std::endl;
-        return 0;
-    }
-    result = tmp;
-    return 1;
+Number Calculator::GetNumber() const { return number_; }
+void Calculator::Set(Number n) { number_ = n; }
+void Calculator::Add(Number n) { number_ += n; } 
+void Calculator::Sub(Number n) { number_ -= n; }
+void Calculator::Div(Number n) { number_ /= n; }
+void Calculator::Mul(Number n) { number_ *= n; }
+void Calculator::Pow(Number n) { number_ = std::pow(number_, n); }
+void Calculator::Save() {
+  is_saved_ = true;
+  saved_number_ = number_;
 }
-
-bool ReadOperation(std::string& op){
-    std::string tmp;
-    if(!(std::cin>>tmp)){
-        std::cerr<<"Error: Wrong input op "<<tmp<<std::endl;
-        return 0;
-    }
-    op = tmp;
-    return 1;
+void Calculator::Load() {
+  if (is_saved_) {
+    number_ = saved_number_;
+  }
 }
-
-bool RunCalculatorCycle(){
-    Number calc;
-    Number tmp;
-    Number save;
-    std::string op;
-    bool is_save = false;
-    if(!ReadNumber(calc)){
-        return 0;
-    }
-    while(true){
-        if(!ReadOperation(op)){
-            return 0;
-        }
-        if(op=="s"){
-            save = calc;
-            is_save = true;
-        }
-        else if(op=="l"){
-            if(!(is_save)){
-                std::cerr<<"Error: Memory is empty"<<std::endl;
-                return 0;
-            }
-            calc = save;
-        }
-        else if(op=="+"){
-            if(!ReadNumber(tmp)){
-                return 0;
-            }
-            calc += tmp;
-        }
-        else if(op=="-"){
-            if(!ReadNumber(tmp)){
-                return 0;
-            }
-            calc -= tmp;
-        }
-        else if(op=="*"){
-            if(!ReadNumber(tmp)){
-                return 0;
-            }
-            calc *= tmp;
-        }
-        else if(op == "/"){
-            if(!ReadNumber(tmp)){
-                return 0;
-            }
-            calc /= tmp;
-        }
-        else if(op == "**"){
-            if(!ReadNumber(tmp)){
-                return 0;
-            }
-            calc = std::pow(calc,tmp);
-        }
-        else if(op == "="){
-            std::cout<<calc<<std::endl;
-        }
-        else if(op == ":"){
-            if(!ReadNumber(tmp)){
-                return 0;
-            }
-            calc = tmp;
-        }
-        else if(op == "c"){
-            calc = 0;
-        }
-        else if(op == "q"){
-            return 1;
-        }
-        else{
-            std::cerr<<"Error: Unknown token "<<op<<std::endl;
-            return 0;
-        }
-    }
+bool Calculator::HasMem() const {
+  if (is_saved_) {
+    return true;
+  }
+  return false;
+}
+std::string Calculator::GetNumberRepr() const {
+  return std::to_string(number_);
 }
