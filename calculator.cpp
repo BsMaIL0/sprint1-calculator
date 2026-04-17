@@ -1,10 +1,11 @@
 #include "calculator.h"
-#include <string>
+
 #include <cmath>
+#include <string>
 
 Number Calculator::GetNumber() const { return number_; }
 void Calculator::Set(Number n) { number_ = n; }
-void Calculator::Add(Number n) { number_ += n; } 
+void Calculator::Add(Number n) { number_ += n; }
 void Calculator::Sub(Number n) { number_ -= n; }
 void Calculator::Div(Number n) { number_ /= n; }
 void Calculator::Mul(Number n) { number_ *= n; }
