@@ -2,7 +2,6 @@
 
 [![C++](https://img.shields.io/badge/C++-11-blue.svg)](https://en.cppreference.com/w/cpp/11)
 [![CMake](https://img.shields.io/badge/CMake-3.10+-green.svg)](https://cmake.org/)
-[![Status](https://img.shields.io/badge/status-completed-brightgreen.svg)]()
 
 Консольный калькулятор с поддержкой арифметических операций, памяти (save/load) и обработкой ошибок. Учебный проект в рамках курса Яндекс Практикум.
 
